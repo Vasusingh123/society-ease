@@ -52,6 +52,5 @@
   "devDependencies": {
     "gulp": "4.0.2",
     "gulp-append-prepend": "^1.0.9"
-  },
-  "proxy": "https://societ-ease-server.onrender.com"
+  }
 }
