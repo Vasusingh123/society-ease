@@ -34,18 +34,7 @@ function Tables() {
 
   const [mntList, setMntList] = useState({
     "success": true,
-    "maintenance": [
-      {
-        "_id": "64301ff245e1048ac23e1a61",
-        "maintenanceID": "ad48e906-72a9-444b-a364-55ff479b660b",
-        "maintenanceSubject": "kkkkkkk",
-        "maintenanceDescription": "jkkshjdasfjndfndsmnfndsbnf",
-        "maintenanceBudget": 20000,
-        "maintenanceStatus": "Ongoing",
-        "maintenancePriority": "High",
-        "__v": 0
-      }
-    ]
+    "maintenance": []
   })
 
   const updateItem = (mnt) => {
@@ -150,7 +139,7 @@ function Tables() {
         
         <Row>
           <Col lg="3" md="3" sm="12" className="mx-4 d-flex align-items-center justify-content-center"><FontAwesomeIcon icon={faCirclePlus} onClick={() => { addRef.current.click() }} style={{ height: "200px", color: "#7a7a7a", cursor:"pointer" }} /></Col>
-          {mntList.maintenance.map((mnt)=>{
+          {mntList?.maintenance?.map((mnt)=>{
             return <>
               <MaintenanceItem updateItem={updateItem} deleteItem={deleteItem} mnt={mnt}></MaintenanceItem>
             </>

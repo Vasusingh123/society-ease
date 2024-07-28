@@ -24,22 +24,7 @@ function Bills() {
     billType: "",
     billAmount: ""
   })
-  const [billList, setBillList] = useState({
-    "success": true,
-    "bills": [
-      {
-        "_id": "6430567633c6406d6e317eb6",
-        "billID": "dd2f1604-182e-42e2-9611-7a073b157f56",
-        "billRoomNumber": 101,
-        "billForResident": "903c6429-9884-48ce-83e7-887630677c14",
-        "billType": "Water",
-        "billDue": 2000,
-        "billStatus": "Paid",
-        "__v": 0,
-        "billTotal": 3000
-      }
-    ]
-  })
+  
   const [catBill, setCatBill] = useState([
     {
       billRoomNumber: "",

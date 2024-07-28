@@ -33,18 +33,7 @@ function Notice() {
 
   const [noticeList, setNoticeList] = useState({
     "success": true,
-    "notices": [
-      {
-        "_id": "642d8b32e700b17c4997263f",
-        "noticeID": "3d699093-ee88-4d83-a0ed-eda24637204c",
-        "noticeSubject": "This is demo subject",
-        "noticeDescription": "jhkhjkfhjkdfkdjfhdkjfdsjkfdsjkfhkjdfhkjsdfjkdshfjhjkdhfjdhfskjhksdjhfkjdsfjkdsfnmsdfjkhfuhfjndsnfdsmffmdsfnsdbfdsjhfsdhfkjsn",
-        "createdAt": "2023-04-05T14:52:34.158Z",
-        "updatedAt": "2023-04-05T14:52:34.158Z",
-        "__v": 0
-      },
-
-    ]
+    "notices": []
   })
 
   const updateItem = (notice) => {
@@ -146,7 +135,7 @@ function Notice() {
       <div className="content w-auto h-auto">
         <Row>
           <Col lg="3" md="3" sm="12" className="mx-4 d-flex align-items-center justify-content-center" ><FontAwesomeIcon icon={faCirclePlus} style={{ height: "200px", color: "#7a7a7a", cursor:"pointer"}} onClick={() => { addRef.current.click(); console.log("hello") }} /></Col>
-          {noticeList.notices.map((notice) => {
+          {noticeList?.notices?.map((notice) => {
             return <>
               <NoticeItem updateItem={updateItem} deleteItem={deleteItem} notice={notice} ></NoticeItem>
             </>
