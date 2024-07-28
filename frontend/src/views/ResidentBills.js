@@ -24,19 +24,7 @@ function Bills() {
     residentID: residentID
   })
 
-  const [paymentList, setPaymentList] = useState({
-    "success": true,
-    "payments": [
-      {
-        "_id": "64305f6e419120d7cd4af6d0",
-        "paymentID": "adsadhjjj",
-        "paymentAmount": 1000,
-        "paidBy": "903c6429-9884-48ce-83e7-887630677c14",
-        "paymentStatus": "Successful",
-        "__v": 0
-      },
-    ]
-  })
+  const [paymentList, setPaymentList] = useState({})
 
 
   const [catBill, setCatBill] = useState([
@@ -253,7 +241,7 @@ function Bills() {
                     </tr>
                   </thead>
                   <tbody style={{}}>
-                    {paymentList.payments.map((payment) => {
+                    {paymentList?.payments?.map((payment) => {
                       return <tr key={payment.paymentID}>
                         <td>{payment.paymentAmount}</td>
                         <td>{payment.paymentID}</td>
