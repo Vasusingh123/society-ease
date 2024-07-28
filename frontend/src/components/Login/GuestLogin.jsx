@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import { loginUser, createGuest } from "api/Auth/authApi";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "context/AuthContext";
 
-export default function (props) {
+export default function GuestLogin(props) {
   let [authMode, setAuthMode] = useState("signin")
+  const {login} = useAuth();
+
   const history = useHistory();
   const { showErrorMessage, showSuccessMessage } = props;
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -42,9 +45,10 @@ export default function (props) {
     const response = await loginUser(credentials);
     console.log(response)
     if (response.success) {
-      localStorage.setItem('userType', "guest");
-      localStorage.setItem('token', response.authToken)
-      localStorage.setItem('userDetails', JSON.stringify(response.userDetails[0]));
+      // localStorage.setItem('userType', "guest");
+      // localStorage.setItem('token', response.authToken)
+      // localStorage.setItem('userDetails', JSON.stringify(response.userDetails[0]));
+      login(response.authToken, "guest", JSON.stringify(response.userDetails[0]));
       history.push("/guest/dashboard")
     } else {
       console.log(response)
@@ -56,11 +60,10 @@ export default function (props) {
     e.preventDefault();
     const response = await createGuest(guestData);
     if (response.success) {
-      localStorage.setItem('userType', "guest");
-      localStorage.setItem('token', response.authToken)
-      localStorage.setItem('userDetails', JSON.stringify(response.userDetails))
+      login(response.authToken, "guest", JSON.stringify(response.userDetails));
       console.log(response)
       history.push("/guest/dashboard")
+      window.location.reload();
       showSuccessMessage("Signed In Successfully !!");
     } else {
       console.log(response)

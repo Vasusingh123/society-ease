@@ -11,9 +11,12 @@ import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import ResidentComplaintItem from "components/Items/ResidentComplaintItem";
 import { getMyComplaints} from "api/Complaint/complaintApi";
 import { addComplaint, updateComplaint, deleteComplaint, resolveComplaint } from "api/Complaint/complaintApi";
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 
 function ResidentComplaint() {
   const closeref = useRef();
+  const closeCreateRef = useRef();
   const addRef = useRef();
   const editRef = useRef();
   const delRef = useRef();
@@ -34,21 +37,7 @@ function ResidentComplaint() {
 
   const [complaintList, setComplaintList] = useState({
     "success": true,
-    "myComplaints": [
-      {
-        "_id": "64328d93b5cf1efc4368a3bb",
-        "complaintID": "a599f6c6-2759-47b3-98b0-c36219379c46",
-        "residentID": "903c6429-9884-48ce-83e7-887630677c14",
-        "complaintSubject": "dfdsf",
-        "complaintDescription": "uuuuuuuuuuuuuuiiiiiiiiiiggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
-        "complaintBy": "Prashant Kumar singh Room No: 101",
-        "complaintStatus": "Not resolved",
-        "complaintPriority": "High",
-        "createdAt": "2023-04-09T10:04:03.210Z",
-        "updatedAt": "2023-04-09T10:04:03.210Z",
-        "__v": 0
-      }
-    ]
+    "myComplaints": []
   })
 
   const updateItem = (complaint) => {
@@ -136,7 +125,7 @@ function ResidentComplaint() {
     const response = await addComplaint(complaintData);
     if (response.success) {
       console.log(response)
-      closeref.current.click();
+      closeCreateRef.current.click();
       showSuccessMessage("Complaint Posted")
       fetchAllComplaints()
     } else {
@@ -159,8 +148,8 @@ function ResidentComplaint() {
     fetchAllComplaints();
   }, [])
 
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-  const userType = localStorage.getItem('userType')
+  const userDetails = JSON.parse(getUserDetails())
+  const userType = getUserType()
 
   return (
     
@@ -171,7 +160,7 @@ function ResidentComplaint() {
       <div className="content w-auto h-auto">
         <Row>
           <Col lg="3" md="3" sm="12" className="mx-4 d-flex align-items-center justify-content-center"><FontAwesomeIcon icon={faCirclePlus} onClick={() => { addRef.current.click() }} style={{ height: "200px", color: "#7a7a7a", cursor:"pointer" }} /></Col>
-          {complaintList.myComplaints.map((complaint)=>{
+          {complaintList?.myComplaints?.map((complaint)=>{
             return <>
               <ResidentComplaintItem updateItem={updateItem} deleteItem={deleteItem} resolveItem = {resolveItem} complaint={complaint}></ResidentComplaintItem>
             </>
@@ -221,7 +210,7 @@ function ResidentComplaint() {
                         </div>
 
                         <div className="col-12">
-                          <button ref={closeref} type="button" className="btn" data-dismiss="modal">Close</button>
+                          <button ref={closeCreateRef} type="button" className="btn" data-dismiss="modal">Close</button>
                           <button type="submit" className="btn btn-success"> Post Complaint</button>
                         </div>
                       </form>

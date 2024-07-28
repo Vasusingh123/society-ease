@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { loginUser } from "api/Auth/authApi";
 import { useHistory } from 'react-router-dom';
+import { useAuth } from "context/AuthContext";
 
 export default function Adminlogin(props) {
   const history = useHistory();
+  const { login } = useAuth();
   const { showErrorMessage, showSuccessMessage } = props;
   const [submitStatus, setSubmitStatus] = useState(false);
   const [credentials, setCredentials] = useState({
@@ -25,10 +27,18 @@ export default function Adminlogin(props) {
     const response = await loginUser(credentials);
     if (response.success) {
       console.log(response)
-      localStorage.setItem('userType', "admin");
-      localStorage.setItem('token', response.authToken)
-      localStorage.setItem('userDetails', JSON.stringify(response.userDetails[0]))
+      // localStorage.removeItem('userType');
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('userDetails');
+      // localStorage.clear();
+      
+      // localStorage.setItem('userType', "admin");
+      // localStorage.setItem('token', await response.authToken)
+      // localStorage.setItem('userDetails', JSON.stringify(response.userDetails[0]))
+      login(response.authToken, "admin", JSON.stringify(response.userDetails[0]));
+
       history.push("/admin/dashboard")
+      window.location.reload();
       showSuccessMessage("Signed In Successfully !!")
     } else {
       showErrorMessage(response.error)

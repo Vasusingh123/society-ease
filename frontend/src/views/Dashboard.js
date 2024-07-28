@@ -12,12 +12,14 @@ import { Link } from 'react-router-dom';
 import "../assets/css/paper-dashboard.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 
 
 function Dashboard() {
   
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-  const userType = localStorage.getItem('userType')
+  const userDetails = JSON.parse(getUserDetails())
+  const userType = getUserType()
 
   return (
     <>

@@ -2,7 +2,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export async function loginUser(credentials){
     console.log(credentials)
-    console.log('...');
+    
     const response = await fetch(`${API_URL}/api/auth/login`,{
         method: 'POST',
         headers: {
@@ -12,6 +12,7 @@ export async function loginUser(credentials){
     });
 
     const res = await response.json();
+    console.log(res);
     return res;
 }
 

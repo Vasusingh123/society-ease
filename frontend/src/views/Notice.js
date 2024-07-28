@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { getNotice, updateNotice, deleteNotice, addNotice } from "api/Notice/noticeApi";
 import NoticeItem from "components/Items/NoticeItem";
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 
 
 function Notice() {
@@ -133,8 +135,8 @@ function Notice() {
     fetchAllNotices();
   }, [])
 
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-  const userType = localStorage.getItem('userType')
+  const userDetails = JSON.parse(getUserDetails())
+  const userType = getUserType()
 
   return (
     <>

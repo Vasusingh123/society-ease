@@ -7,7 +7,7 @@ const Admin = require('../../models/admin/Admin.model');
 const Auth = require('../../models/auth/LoginInfo.model');
 const Guest = require('../../models/guest/Guest.model');
 const { uuid } = require('uuidv4');
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "vasu123";
 
 //ROUTE 1: POST Login API
 router.post('/login',async (req,res)=>{

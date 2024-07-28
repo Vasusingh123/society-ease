@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Row} from "reactstrap";
 import { getAllComplaints } from "api/Complaint/complaintApi";
 import ComplaintItem from "./Items/ComplaintItem";
+import { getAuthToken } from "utility/cookiesUtil";
 
 export default function Complaints() {
     const [complaintList, setComplaintList] = useState({
@@ -24,7 +25,8 @@ export default function Complaints() {
 
     const fetchAllComplaints = async ()=>{
         const response = await getAllComplaints();
-        console.log(localStorage.getItem('token'))
+        // console.log(localStorage.getItem('token'))
+        console.log("complaints, auth-token: ",getAuthToken());
         if(response.success){
             setComplaintList(response);
             console.log(response)
@@ -37,7 +39,6 @@ export default function Complaints() {
 
     useEffect(() => {
         fetchAllComplaints();
-        
     }, [])
 
     return (

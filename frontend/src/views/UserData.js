@@ -10,6 +10,8 @@ import {
 } from "reactstrap";
 import {getAllResident} from '../api/Admin/adminApi';
 import User from "components/User";
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 
 function UserData() {
   const [residentList, setResidentList] = useState({
@@ -47,8 +49,8 @@ function UserData() {
     fetchAllResident();
   }, [])
 
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-  const userType = localStorage.getItem('userType')
+  const userDetails = JSON.parse(getUserDetails())
+  const userType = getUserType()
 
   return (
     <>

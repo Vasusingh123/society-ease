@@ -8,11 +8,13 @@ import {
   Col
 } from "reactstrap";
 import { Link } from 'react-router-dom';
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 const moment = require('moment') 
 
 function GuestDashboard() {
-  const guest = JSON.parse(localStorage.getItem('userDetails'))
-  const userType = localStorage.getItem('userType')
+  const guest = JSON.parse(getUserDetails())
+  const userType = getUserType()
   return (
     <>
     {userType==='guest' && guest? 

@@ -10,11 +10,12 @@ import AdminLayout from "layouts/Admin.js";
 import ResidentLayout from "layouts/Resident";
 import Login  from "layouts/Login"
 import GuestLayout from "layouts/Guest";
+import { AuthProvider } from "context/AuthContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 
 root.render(
-
+  <AuthProvider>
   <HashRouter>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
@@ -24,4 +25,5 @@ root.render(
       <Redirect to="/login" />
     </Switch>
   </HashRouter>
+  </AuthProvider>
 );

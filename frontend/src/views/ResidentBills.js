@@ -10,13 +10,13 @@ import {
   Col
 } from "reactstrap";
 import { getMyBills, payBill, getMyPayments} from "api/Bills/billApi";
-import { Link } from 'react-router-dom';
+import { getUserDetails } from "utility/cookiesUtil";
 
 function Bills() {
   const closeref = useRef();
   const addRef = useRef();
 
-  const residentID = JSON.parse(localStorage.getItem('userDetails')).residentID;
+  const residentID = JSON.parse(getUserDetails()).residentID;
   const [paymentData, setPaymentData] = useState({
     paymentAmount: 0,
     billType: "",
@@ -38,22 +38,6 @@ function Bills() {
     ]
   })
 
-  const [billList, setBillList] = useState({
-    "success": true,
-    "bills": [
-      {
-        "_id": "6430567633c6406d6e317eb6",
-        "billID": "dd2f1604-182e-42e2-9611-7a073b157f56",
-        "billRoomNumber": 101,
-        "billForResident": "903c6429-9884-48ce-83e7-887630677c14",
-        "billType": "Water",
-        "billDue": 2000,
-        "billStatus": "Paid",
-        "__v": 0,
-        "billTotal": 3000
-      }
-    ]
-  })
 
   const [catBill, setCatBill] = useState([
     {
@@ -165,7 +149,7 @@ function Bills() {
             <Card>
               <CardHeader>
               <div className="d-flex flex-row">
-              <CardTitle tag="h4">Your Bill </CardTitle>
+              <CardTitle tag="h4">Your Bills </CardTitle>
               <button className="btn btn btn-outline-success ml-auto" onClick = {handleClick}> Pay Bill</button>
               </div>
               </CardHeader>
@@ -182,6 +166,7 @@ function Bills() {
                     </tr>
                   </thead>
                   <tbody>
+                    {catBill.length === 0 ? <tr><td></td><td></td><td></td><div className="mt-1"><p>No bills present</p></div></tr>:<>
                     {catBill.map((bill) => {
                       return <tr key={bill.billID}>
                         <td>{bill.billRoomNumber}</td>
@@ -191,7 +176,7 @@ function Bills() {
                         <td >{bill.wifi_Dues ? bill.wifi_Dues : 0}</td>
                         <td >{bill.total_Dues ? bill.total_Dues : 0}</td>
                       </tr>
-                    })}
+                    })}</>}
 
                   </tbody>
                 </Table>
@@ -219,7 +204,7 @@ function Bills() {
               <CardFooter>
                 <hr />
                 <div className="stats">
-                  Upi id- 8696054228@ybl
+                  Upi id- vaaasss97@okaxis
                 </div>
               </CardFooter>
             </Card>
@@ -243,9 +228,9 @@ function Bills() {
               <CardFooter>
                 <hr />
                 <div className="stats">
-                <strong>Prateek Arora</strong>
+                <strong>Vasu Singh</strong>
                 <br />
-                  Account No- 028501007055
+                  Account No- 4566678906
                   <br />
                   IFSC- ICIC0000285
                 </div>

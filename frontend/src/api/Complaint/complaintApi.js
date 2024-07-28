@@ -1,6 +1,7 @@
+import { getAuthToken } from "utility/cookiesUtil";
 const API_URL = process.env.REACT_APP_API_URL;
-const adminAuthToken = localStorage.getItem('token')
-const residentAuthToken = localStorage.getItem('token');
+const adminAuthToken = getAuthToken();
+const residentAuthToken = getAuthToken();
 
 export async function addComplaint(complaintData){
     const response = await fetch(`${API_URL}/api/complaint/createcomplaint`,{
@@ -41,6 +42,7 @@ export async function getMyComplaints(){
 
     });
 
+    console.log("mycomplaints token:", residentAuthToken)
     return await response.json();
 }
 

@@ -86,7 +86,7 @@ router.post('/getallcomplaints', fetchuser, async (req, res)=>{
     
     try{
         const userType = req.user.userType;
-        
+        console.log(userType);
         if(userType !== 'admin'){
             return res.status(403).json({success, error:"Permission Denied!"})
         }

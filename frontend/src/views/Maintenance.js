@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import MaintenanceItem from "components/Items/MaintenanceItem";
 import { getMaintenance, updateMaintenance, deleteMaintenance, addMaintenance } from "api/Maintenance/maintenanceApi";
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 
 function Tables() {
   const closeref = useRef();
@@ -135,8 +137,8 @@ function Tables() {
     fetchAllMaintenance();
   }, [])
 
-  const userDetails = JSON.parse(localStorage.getItem('userDetails'))
-  const userType = localStorage.getItem('userType')
+  const userDetails = JSON.parse(getUserDetails())
+  const userType = getUserType()
 
   return (
     

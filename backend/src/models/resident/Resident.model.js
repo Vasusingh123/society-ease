@@ -37,8 +37,7 @@ const residentSchema = new Schema({
         }
     ],
     securityKey:{
-        type: String,
-        required: true
+        type: String
     }, 
     status:{
         type: String,

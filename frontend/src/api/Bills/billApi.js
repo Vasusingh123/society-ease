@@ -1,6 +1,7 @@
+import { getAuthToken } from "utility/cookiesUtil";
 const API_URL = process.env.REACT_APP_API_URL;
-const adminAuthToken = localStorage.getItem('token')
-const residentAuthToken = localStorage.getItem('token')
+const adminAuthToken = getAuthToken();
+const residentAuthToken = getAuthToken();
 
 export async function addBill(billData){
     console.log(billData)

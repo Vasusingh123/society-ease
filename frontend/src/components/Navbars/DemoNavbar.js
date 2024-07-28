@@ -5,10 +5,12 @@ import {
   NavbarBrand,
   Container,
 } from "reactstrap";
+import { useAuth } from "context/AuthContext";
 
 import routes from "routes.js";
 
 function Header(props) {
+  const {logout} = useAuth();
   const [isOpen, setIsOpen] = React.useState(false);
   const [color, setColor] = React.useState("transparent");
   const sidebarToggle = React.useRef();
@@ -16,10 +18,12 @@ function Header(props) {
   const history = useHistory();
 
   const handleLogout = ()=>{
-    localStorage.removeItem('userDetails')
-    localStorage.removeItem('token')
-    localStorage.removeItem('userType')
-    localStorage.removeItem('auth-token')
+    // localStorage.removeItem('userDetails')
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('userType')
+    
+    // localStorage.clear();
+    logout();
     history.push("/login");
   }
 

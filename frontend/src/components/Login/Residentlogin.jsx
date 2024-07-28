@@ -1,9 +1,12 @@
 import React, { useState } from "react"
 import { loginUser, createResident } from "api/Auth/authApi";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "context/AuthContext";
+import { getAuthToken } from "utility/cookiesUtil";
 
-export default function (props) {
+export default function ResidentLogin(props) {
   let [authMode, setAuthMode] = useState("signin")
+  const {login} = useAuth();
   const history = useHistory();
   const [submitStatus, setSubmitStatus] = useState(false);
   const { showErrorMessage, showSuccessMessage } = props;
@@ -42,10 +45,18 @@ export default function (props) {
     setSubmitStatus(true);
     const response = await loginUser(credentials);
     if (response.success) {
-      localStorage.setItem('userType', "resident");
-      localStorage.setItem('token', response.authToken)
-      localStorage.setItem('userDetails', JSON.stringify(response.userDetails[0]));
+      // localStorage.removeItem('userType');
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('userDetails');
+      // localStorage.clear();
+      
+      // localStorage.setItem('userType', "resident");
+      // localStorage.setItem('token', await response.authToken)
+      // localStorage.setItem('userDetails', JSON.stringify(response.userDetails[0]));
+      login(await response.authToken, "resident", JSON.stringify(await response.userDetails[0]));
+      
       history.push("/resident/dashboard")
+      window.location.reload();
       showSuccessMessage("Signed In Successfully !!")
     } else {
       console.log(response)
@@ -59,9 +70,7 @@ export default function (props) {
     setSubmitStatus(true);
     const response = await createResident(resData);
     if (response.success) {
-      localStorage.setItem('userType', "resident");
-      localStorage.setItem('token', response.authToken)
-      localStorage.setItem('userDetails', JSON.stringify(response.userDetails))
+      login(response.authToken, "resident", JSON.stringify(response.userDetails));
       history.push("/resident/dashboard")
     } else {
       console.log(response)

@@ -1,5 +1,6 @@
+import { getAuthToken } from "utility/cookiesUtil";
 const API_URL = process.env.REACT_APP_API_URL;
-const adminAuthToken = localStorage.getItem('token');
+const adminAuthToken = getAuthToken();
 
 export async function addMaintenance(maintenanceData){
     const response = await fetch(`${API_URL}/api/maintenance/createmaintenance`,{

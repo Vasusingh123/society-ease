@@ -12,10 +12,12 @@ import { getMyBills } from "api/Bills/billApi";
 import { getMyComplaints } from "api/Complaint/complaintApi";
 import { getNotice } from "api/Notice/noticeApi";
 import { getMaintenance } from "api/Maintenance/maintenanceApi";
+import { getUserDetails } from "utility/cookiesUtil";
+import { getUserType } from "utility/cookiesUtil";
 
 function ResidentDashboard() {
-    const residentData = JSON.parse(localStorage.getItem('userDetails'))
-    const userType = localStorage.getItem('userType')
+    const residentData = JSON.parse(getUserDetails())
+    const userType = getUserType()
     const [complaintCount, setComplaintCount] = useState(0);
     const [noticeCount, setNoticeCount] = useState(0);
     const [maintenanceCount, setMaintenanceCount] = useState(0);
